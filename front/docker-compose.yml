@@ -15,3 +15,23 @@ services:
     restart: always
     ports:
       - "8080:8080"
+  server:
+    image: nodejs
+    volumes:
+      - ../server:/server
+      - server/node_modules
+    build:
+      context: .
+      dockerfile: ../server/DockerfileNodejs
+    restart: always
+    ports:
+      - 8000:8000
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_ROOT_PASSWORD
+      - PORT=8000
+    depends_on:
+      - db
+    command: node server.js
