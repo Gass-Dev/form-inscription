@@ -1,9 +1,9 @@
 #Create Node.js Image
-FROM node.20
+FROM node:20
 WORKDIR /server
 #
-COPY package.js ./
-COPY package-lock.json ./
-RUN npm install --silent
+# COPY package.js ./
+# COPY package-lock.json ./
+RUN npm install mysql2 dotenv express cors body-parser --silent
 #
 EXPOSE 8000

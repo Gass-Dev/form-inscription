@@ -1,19 +1,7 @@
-const mysql = require('mysql2');
-const connection = mysql.createConnection({
-    user: 'root',
-    password: 'mysecret-pw',
-    database: 'ynov_ci',
-    port: '3305'
-});
+const app = require("./app");
+const dotenv = require("dotenv");
+dotenv.config();
 
-connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connecté à la base de données MySQL!");
+app.listen(8000, () => {
+  console.log("server running on port ${8000}");
 });
-
-connection.query('SELECT * from utilisateur', function (error, results, fields) {
-    if (error) throw error;
-    console.log("NB users: ", results.length);
-});
-
-connection.end();
