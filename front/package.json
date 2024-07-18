@@ -46,5 +46,10 @@
     "cypress": "^13.13.1",
     "jsdoc": "^4.0.3",
     "react-test-renderer": "^18.3.1"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)/"
+    ]
   }
 }
