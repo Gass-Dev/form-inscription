@@ -1,25 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import { countUsers } from './api';
+import { useState, useEffect } from 'react';
 
 function App() {
+  let [usersCount, setUsersCount] = useState(0);
+  
+  useEffect(() => {
+    const setUsers = async () => {
+      try {
+        let count = await countUsers();
+        setUsersCount(count)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    setUsers()
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Users manager</h1>
+        <p>{usersCount} user(s) already registered</p>
       </header>
     </div>
   );
 }
-
 export default App;
