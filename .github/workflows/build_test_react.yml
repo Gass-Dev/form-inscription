@@ -40,7 +40,7 @@ jobs:
       - name: Run e2e tests with cypress
         uses: cypress-io/github-action@v6
         with:
-          project: ./front
+          working-directory: front
       - name: Stop the stack
         run: docker-compose down
       - name: Upload coverage reports to Codecov
