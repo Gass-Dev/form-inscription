@@ -16,7 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --watchAll=false",
+    "test": "react-scripts test --coverage --watchAll=false --setupFiles=./.jest/setEnvVars.js",
     "eject": "react-scripts eject",
     "jsdoc": "jsdoc -R ./README.md -c ./jsdoc.config.json -r -d ./public/docs",
     "cypress": "cypress open"
@@ -40,10 +40,12 @@
     ]
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.24.7",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "^7.24.8",
     "@babel/preset-react": "^7.24.7",
     "babel": "^6.23.0",
     "cypress": "^13.13.1",
+    "jest": "^27.5.1",
     "jsdoc": "^4.0.3",
     "react-test-renderer": "^18.3.1"
   },
