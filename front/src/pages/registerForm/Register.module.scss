@@ -1,0 +1,57 @@
+/* Register.module.scss */
+form {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  input {
+    color: #fff;
+    margin-bottom: 12px;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: transparent;
+    transition: border-color 0.3s;
+  }
+  
+  input:focus {
+    border-color: #3f51b5;
+    outline: none;
+    color: #fff;
+  }
+  
+  button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #3f51b5;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #303f9f;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  p {
+    text-align: center;
+    color: #a7a7a7;
+    margin-bottom: 20px;
+  }
+  

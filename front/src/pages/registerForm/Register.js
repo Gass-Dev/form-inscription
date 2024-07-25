@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Register.module.scss";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const RegistrationForm = () => {
     city: "",
     postalCode: "",
   });
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -29,11 +31,12 @@ const RegistrationForm = () => {
       });
 
       if (response.ok) {
-        console.log("User registered successfully");
+        setMessage("User registered successfully");
       } else {
-        console.error("Error registering user");
+        setMessage("Error registering user");
       }
     } catch (error) {
+      setMessage("Error registering user");
       console.error("Error:", error);
     }
 
@@ -49,16 +52,17 @@ const RegistrationForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1>Register</h1>
       <input
         name="firstName"
-        placeholder="Prénom"
+        placeholder="First Name"
         value={formData.firstName}
         onChange={handleChange}
         required
       />
       <input
         name="lastName"
-        placeholder="Nom"
+        placeholder="Last Name"
         value={formData.lastName}
         onChange={handleChange}
         required
@@ -71,8 +75,10 @@ const RegistrationForm = () => {
         onChange={handleChange}
         required
       />
+      <label htmlFor="birthDate">Birth Date</label>
       <input
         name="birthDate"
+        id="birthDate"
         type="date"
         value={formData.birthDate}
         onChange={handleChange}
@@ -80,19 +86,20 @@ const RegistrationForm = () => {
       />
       <input
         name="city"
-        placeholder="Ville"
+        placeholder="City"
         value={formData.city}
         onChange={handleChange}
         required
       />
       <input
         name="postalCode"
-        placeholder="Code Postal"
+        placeholder="Postal Code"
         value={formData.postalCode}
         onChange={handleChange}
         required
       />
-      <button type="submit">Sauvegarder</button>
+      <button type="submit">Register</button>
+      {message && <p>{message}</p>}
     </form>
   );
 };
