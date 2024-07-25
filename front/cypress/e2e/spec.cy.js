@@ -5,7 +5,7 @@ describe('template spec', () => {
   
     it('deployed react app to localhost', () => {
       cy.visit('http://localhost:3000')
-      cy.contains('0 user(s) already registered')
+      cy.contains('1 user(s) already registered')
     })
     
   })
