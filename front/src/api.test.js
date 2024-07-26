@@ -1,18 +1,18 @@
-import { countUsers } from './api';
-import axios from 'axios';
-jest.mock('axios');
+import { countUsers } from "./api";
+import axios from "axios";
+jest.mock("axios");
 
-describe('countUsers', () => {
-  it('fetches successfully data from an API', async () => {
+describe("countUsers", () => {
+  it("fetches successfully data from an API", async () => {
     const data = {
       data: {
         utilisateurs: [
           {
-            id: '1',
-            nom: 'a',
-            prenom: 'b',
-            email: 'c@c.fr'
-          }
+            id: "1",
+            nom: "a",
+            prenom: "b",
+            email: "c@c.fr",
+          },
         ],
       },
     };
@@ -20,15 +20,15 @@ describe('countUsers', () => {
     axios.get.mockImplementationOnce(() => Promise.resolve(data));
     await expect(countUsers()).resolves.toEqual(1);
     expect(axios.get).toHaveBeenCalledWith(
-      `https://register-base-backend.vercel.app`,
+      `https://register-base-backend.vercel.app/users`
     );
   });
 
-  it('fetches erroneously data from an API', async () => {
-    const errorMessage = 'Network Error';
+  it("fetches erroneously data from an API", async () => {
+    const errorMessage = "Network Error";
 
     axios.get.mockImplementationOnce(() =>
-      Promise.reject(new Error(errorMessage)),
+      Promise.reject(new Error(errorMessage))
     );
 
     await expect(countUsers()).rejects.toThrow(errorMessage);
