@@ -1,53 +1,61 @@
-# Use root.example as user/password credentials
+version: '3.8'
+
 services:
   db:
-    image: mysql
+    image: mysql:latest
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - ./sqlfiles/:/docker-entrypoint-initdb.d/
     ports:
       - "3306:3306"
 
   adminer:
-    image: adminer
+    image: adminer:latest
     restart: always
     ports:
       - "8080:8080"
+
   server:
-    image: nodejs
+    image: node:latest
+    build:
+      context: ../server
+      dockerfile: DockerfileNodejs
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      PORT: 8000
+      MYSQL_PORT: 3306
     volumes:
       - ../server:/server
       - /server/node_modules
-    build:
-      context: .
-      dockerfile: ../server/DockerfileNodejs
-    restart: always
-    ports:
-      - 8000:8000
-    environment:
-      - MYSQL_HOST=db
-      - MYSQL_DATABASE
-      - MYSQL_USER
-      - MYSQL_ROOT_PASSWORD
-      - PORT=8000
-      - MYSQL_PORT
     depends_on:
       - db
     command: node server.js
+
   react:
-    image: react
-    build: 
+    image: node:latest
+    build:
       context: .
-      dockerfile: ./DockerfileReact
+      dockerfile: DockerfileReact
+    restart: always
     ports:
-      - 3000:3000
+      - "3000:3000"
     environment:
-      - REACT_APP_SERVER_PORT=8000
+      REACT_APP_SERVER_PORT: 8000
     volumes:
       - .:/app
       - /app/node_modules
     depends_on:
       - server
     command: npm start
+
+volumes:
+  server-node_modules:
+  react-node_modules:
