@@ -19,10 +19,7 @@ describe("template spec", () => {
       },
     });
 
-    // Visit the local React app
     cy.visit("http://localhost:3000");
-
-    // Assert that the correct text is displayed
     cy.contains("2 user(s) already registered");
   });
 });
