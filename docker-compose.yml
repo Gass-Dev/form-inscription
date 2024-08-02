@@ -14,8 +14,6 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    depends_on:
-      - server
     command: npm start
 
 volumes:
