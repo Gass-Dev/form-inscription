@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 describe("template spec", () => {
   it("deployed react app to localhost", () => {
-    cy.intercept("GET", "https://register-base-backend.vercel.app", {
+    cy.intercept("GET", "https://register-base-backend.vercel.app?nocache=", {
       statusCode: 200,
       body: {
         utilisateurs: [
