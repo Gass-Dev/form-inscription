@@ -23,7 +23,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install dependencies and run tests
+      - name: Verify presence of package.json
+        run: ls -la
+      - name: Install dependencies and generate package-lock.json
+        run: npm install
+      - name: Clean install dependencies and run tests
         run: |
           npm ci
           npm test
